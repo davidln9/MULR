@@ -1,9 +1,7 @@
 //
 //  TokenGenerator.cpp
 //  MULR
-//
-//  Created by David Edwards on 7/14/18.
-//  Copyright © 2018 David Edwards. All rights reserved.
+//	Open Source Software
 //
 
 #include "TokenGenerator.hpp"
@@ -92,22 +90,24 @@ vector<Token*> TokenGenerator::getTokens() {
                 input.push_back(t);
                 break;
             case '*': //standard
-                checker.checkInput(input, builder, inputChar, id_String, int_string, float_string, t, scanForId, scanForPHP, checkForArrow, checkForGTEQ, checkForLTEQ, parsingInt, parsingFloat, position, line_number, token_id, STANDARD_TYPE, comment, inSingleQuote, inDoubleQuote, singleQuoteString, doubleQuoteString, commentString);
-                if (block_comment && i < INPUT_CLOSE && raw.at(i+1) == '/') {
-                    commentString+="/";
-                    if (COMMENT_MODE == 1) {
-                        t = builder.buildToken(commentString, position, token_id, line_number, COMMENT);
-                        input.push_back(t);
-                    }
-                    i++;
-                    block_comment = false;
-                    commentString = "";
-                    break;
-                } else if (block_comment) {
-                    break;
-                }
-                t = builder.buildToken("*", position, token_id, line_number, STAR);
-                input.push_back(t);
+				if (!checker.checkInput(input, builder, inputChar, id_String, int_string, float_string, t, scanForId, scanForPHP, checkForArrow, checkForGTEQ, checkForLTEQ, parsingInt, parsingFloat, position, line_number, token_id, STANDARD_TYPE, comment, inSingleQuote, inDoubleQuote, singleQuoteString, doubleQuoteString, commentString)) {
+					
+					t = builder.buildToken("*", position, token_id, line_number, STAR);
+					input.push_back(t);
+				}
+				if (block_comment && i < INPUT_CLOSE && raw.at(i+1) == '/') {
+					commentString+="/";
+					if (COMMENT_MODE == 1) {
+						t = builder.buildToken(commentString, position, token_id, line_number, COMMENT);
+						input.push_back(t);
+					}
+					i++;
+					block_comment = false;
+					commentString = "";
+					break;
+				} else if (block_comment) {
+					break;
+				}
                 break;
             case '#': //standard
                 if (checker.checkInput(input, builder, inputChar, id_String, int_string, float_string, t, scanForId, scanForPHP, checkForArrow, checkForGTEQ, checkForLTEQ, parsingInt, parsingFloat, position, line_number, token_id, STANDARD_TYPE, comment, inSingleQuote, inDoubleQuote, singleQuoteString, doubleQuoteString, commentString)) {
@@ -213,11 +213,11 @@ vector<Token*> TokenGenerator::getTokens() {
                 }
                 break;
             case '+' :
-                if (checker.checkInput(input, builder, inputChar, id_String, int_string, float_string, t, scanForId, scanForPHP, checkForArrow, checkForGTEQ, checkForLTEQ, parsingInt, parsingFloat, position, line_number, token_id, STANDARD_TYPE, comment, inSingleQuote, inDoubleQuote, singleQuoteString, doubleQuoteString, commentString)) {
-                    
+                if (!checker.checkInput(input, builder, inputChar, id_String, int_string, float_string, t, scanForId, scanForPHP, checkForArrow, checkForGTEQ, checkForLTEQ, parsingInt, parsingFloat, position, line_number, token_id, STANDARD_TYPE, comment, inSingleQuote, inDoubleQuote, singleQuoteString, doubleQuoteString, commentString)) {
+					t = builder.buildToken("+", position, token_id, line_number, PLUS);
+					input.push_back(t);
                 }
-                t = builder.buildToken("+", position, token_id, line_number, PLUS);
-                input.push_back(t);
+				
                 break;
             case ',' :
 				if (checker.checkInput(input, builder, inputChar, id_String, int_string, float_string, t, scanForId, scanForPHP, checkForArrow, checkForGTEQ, checkForLTEQ, parsingInt, parsingFloat, position, line_number, token_id, STANDARD_TYPE, comment, inSingleQuote, inDoubleQuote, singleQuoteString, doubleQuoteString, commentString)) {
@@ -390,14 +390,17 @@ vector<Token*> TokenGenerator::getTokens() {
                 int_string += inputChar;
                 break;
             case '%' :
-                checker.checkInput(input, builder, inputChar, id_String, int_string, float_string, t, scanForId, scanForPHP, checkForArrow, checkForGTEQ, checkForLTEQ, parsingInt, parsingFloat, position, line_number, token_id, STANDARD_TYPE, comment, inSingleQuote, inDoubleQuote, singleQuoteString, doubleQuoteString, commentString);
-                t = builder.buildToken("%", position, token_id, line_number, MODULO);
-                input.push_back(t);
+				if (!checker.checkInput(input, builder, inputChar, id_String, int_string, float_string, t, scanForId, scanForPHP, checkForArrow, checkForGTEQ, checkForLTEQ, parsingInt, parsingFloat, position, line_number, token_id, STANDARD_TYPE, comment, inSingleQuote, inDoubleQuote, singleQuoteString, doubleQuoteString, commentString)) {
+					t = builder.buildToken("%", position, token_id, line_number, MODULO);
+					input.push_back(t);
+				}
                 break;
             case '^' :
-                checker.checkInput(input, builder, inputChar, id_String, int_string, float_string, t, scanForId, scanForPHP, checkForArrow, checkForGTEQ, checkForLTEQ, parsingInt, parsingFloat, position, line_number, token_id, STANDARD_TYPE, comment, inSingleQuote, inDoubleQuote, singleQuoteString, doubleQuoteString, commentString);
-                t = builder.buildToken("^", position, token_id, line_number, HAT);
-                input.push_back(t);
+				if (!checker.checkInput(input, builder, inputChar, id_String, int_string, float_string, t, scanForId, scanForPHP, checkForArrow, checkForGTEQ, checkForLTEQ, parsingInt, parsingFloat, position, line_number, token_id, STANDARD_TYPE, comment, inSingleQuote, inDoubleQuote, singleQuoteString, doubleQuoteString, commentString)) {
+						t = builder.buildToken("^", position, token_id, line_number, HAT);
+						input.push_back(t);
+				}
+				
                 break;
             case '?' :
                 if (checker.checkInput(input, builder, inputChar, id_String, int_string, float_string, t, scanForId, scanForPHP, checkForArrow, checkForGTEQ, checkForLTEQ, parsingInt, parsingFloat, position, line_number, token_id, STANDARD_TYPE, comment, inSingleQuote, inDoubleQuote, singleQuoteString, doubleQuoteString, commentString)) {

@@ -1,9 +1,7 @@
 //
 //  TokenBuilder.hpp
 //  MULR
-//
-//  Created by David Edwards on 7/15/18.
-//  Copyright © 2018 David Edwards. All rights reserved.
+//	Open Source Software
 //
 
 #ifndef TokenBuilder_hpp

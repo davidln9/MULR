@@ -1,9 +1,7 @@
 //
 //  RegExp.hpp
 //  MULR
-//
-//  Created by David Edwards on 7/19/18.
-//  Copyright © 2018 David Edwards. All rights reserved.
+//	Open Source Software
 //
 
 #ifndef RegExp_hpp

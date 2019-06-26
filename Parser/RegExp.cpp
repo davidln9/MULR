@@ -1,9 +1,7 @@
 //
 //  RegExp.cpp
 //  MULR
-//
-//  Created by David Edwards on 7/19/18.
-//  Copyright © 2018 David Edwards. All rights reserved.
+//	Open Source Software
 //
 
 #include "RegExp.hpp"
@@ -101,7 +99,7 @@ regex * RegExp::parse_regex() {
 				node1->label1->type = EPSILON;
 				node1->neighbor1 = temp->starting;
 				
-				if (t->type == STAR || t->type == QUESTION) { //an option to bypass neighbor1
+				if (t->type == STAR || t->type == QUESTION) { // an option to bypass neighbor1
 					node1->label2 = new label;
 					node1->label2->type = EPSILON;
 					node1->neighbor2 = node2;
@@ -190,7 +188,7 @@ regex * RegExp::parse_regex() {
 					node1->label1->type = EPSILON;
 					node1->neighbor1 = temp->starting;
 					
-					if (t->type == STAR || t->type == QUESTION) { //an option to bypass neighbor1
+					if (t->type == STAR || t->type == QUESTION) { // an option to bypass neighbor1
 						node1->label2 = new label;
 						node1->label2->type = EPSILON;
 						node1->neighbor2 = node2;
@@ -203,7 +201,7 @@ regex * RegExp::parse_regex() {
 					temp->accepting->label1 = new label;
 					temp->accepting->label1->type = EPSILON;
 					
-					if (t->type == STAR || t->type == PLUS) { //the loop feature
+					if (t->type == STAR || t->type == PLUS) { // the loop feature
 						temp->accepting->neighbor2 = temp->starting;
 						temp->accepting->loop = true;
 						temp->accepting->label2 = new label;

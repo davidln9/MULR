@@ -1,9 +1,7 @@
 //
 //  ParseMULR.hpp
 //  MULR
-//
-//  Created by David Edwards on 7/13/18.
-//  Copyright © 2018 David Edwards. All rights reserved.
+//	Open Source Software
 //
 
 #ifndef ParseMULR_hpp
@@ -19,7 +17,12 @@
 #include "RegExp.hpp"
 #include "DFA.h"
 #include "PDABuilder.hpp"
+#include "SetGenerator.h"
+#include <set>
 
+typedef struct statement {
+	statement * next;
+} statement;
 
 class ParseMULR {
 private:
@@ -33,8 +36,11 @@ private:
 //    bool alreadyVisited(std::vector<node*> visited, node* n);
     bool alreadyDecided(std::vector<int> d, int i);
 	TerminalRule * start;
+	
+	std::vector<int> debug_stack;
 	bool match(TerminalRule * entry);
 	std::vector<char> raw;
+	statement * execution;
 public:
 	ParseMULR(std::vector<Token*> in, std::vector<char> raw);
     ~ParseMULR();

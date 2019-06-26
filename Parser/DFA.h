@@ -1,14 +1,13 @@
 //
 //  DFA.h
 //  MULR
-//
-//  Created by David Edwards on 7/19/18.
-//  Copyright © 2018 David Edwards. All rights reserved.
+//	Open Source Software
 //
 
 #ifndef DFA_h
 #define DFA_h
 #include <string>
+#include <set>
 #include <vector>
 
 enum labelType {
@@ -23,8 +22,10 @@ typedef struct regex {
 typedef struct LHS {
     std::string name;
     regex * expression;
-	std::vector<char> first;
-	std::vector<char> follow;
+	std::set<std::string> first;
+	std::set<std::string> follow;
+	std::set<std::string> between;
+	std::set<struct LHS*> affected;
 } TerminalRule;
 
 
@@ -40,7 +41,19 @@ typedef struct branch {
 	std::vector<char> consumed;
 	bool loop;
 	node * altRoute;
+	bool tryRecursion;
 } branch;
+
+typedef struct fbranch {
+	TerminalRule * f;
+	node * altRoute;
+	node * stopAt;
+} followBranch;
+
+typedef struct firstBr {
+	node * altRoute;
+	bool addFirst;
+} firstBranch;
 
 
 typedef struct node {

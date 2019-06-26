@@ -1,9 +1,7 @@
 //
 //  MULRLexer.hpp
 //  MULR
-//
-//  Created by David Edwards on 7/13/18.
-//  Copyright © 2018 David Edwards. All rights reserved.
+//	Open Source Software
 //
 
 #ifndef MULRLexer_hpp

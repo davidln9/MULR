@@ -1,9 +1,7 @@
 //
 //  Validator.hpp
 //  MULR
-//
-//  Created by David Edwards on 7/20/18.
-//  Copyright © 2018 David Edwards. All rights reserved.
+//	Open Source Software
 //
 
 #ifndef Validator_hpp

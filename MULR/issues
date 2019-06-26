@@ -53,3 +53,53 @@ Token[8]: 11: *
 Token[9]: 3: ;
 YES
 Program ended with exit code: 0
+
+12/21/2018: UPDATE: Successfully added functions to start rule. Does not work for complicated issues, but works for this grammar:
+
+MULR;
+
+$S : $A
+   | $B
+   | $C
+   ;
+
+$A : '[' (a (',' a)* | b (',' b)*) ']' ;
+
+$B : '{' (a (',' a)* | b (',' b)*) '}' ;
+
+$C : '(' (a (',' a)* | b (',' b)*) ')' ;
+
+Next challenge will be to make concatenation work from $A to $B. Needs FOLLOW set of A but as noted before that is not an easy task for this project
+
+
+MULR;
+
+$S : ($assignment ';'*) $class_declaration ;
+
+$class_declaration : 'c' 'l' 'a' 's' 's' ' '+ $id $scope ;
+
+$statements : $while_stmt | $for_stmt | $if_stmt | $assignment ;
+$scope : '{' ($statements | $scope | $function) '}' ;
+
+$assignment : ($id '=' $expr | $id '+' '+' | $id '-' '-' | $id '+' '=' $expr) ;
+
+$condition: (($expr (' '* (( '=' | '>' | '<' | '!') '=' ' '*) $expr)*)?) ;
+
+$int : ( 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 )+ ;
+$id :  (( 'a' | 'b' | 'c' | 'd' | 'e' | 'f' | 'g' )+ $int?)+ ;
+
+$expr : '(' $expr ')'
+| $expr '+' $expr
+| $expr '-' $expr
+| $expr '/' $expr
+| $expr '*' $expr
+| $expr '!'
+| $int
+| $id
+;
+
+$while_stmt : 'w' 'h' 'i' 'l' 'e' ' '* '(' $condition ')' '{' $statments* '}' ;
+
+$for_stmt: 'f' 'o' 'r' ' '* '(' $assignment ' '* $condition ';' ' '* $assignment ')' ;
+
+$if_stmt: 'i' 'f' ' '* '(' $condition ')' ' '* '{' $statements '}'

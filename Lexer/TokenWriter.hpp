@@ -1,9 +1,7 @@
 //
 //  TokenWriter.hpp
 //  MULR
-//
-//  Created by David Edwards on 7/18/18.
-//  Copyright © 2018 David Edwards. All rights reserved.
+//	Open Source Software
 //
 
 #ifndef TokenWriter_hpp
